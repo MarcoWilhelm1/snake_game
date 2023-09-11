@@ -10,7 +10,6 @@ void main() async{
     size: Size(600, 600),
     maximumSize: Size(600, 600),
     minimumSize: Size(600, 600),
-    //center: true,
   );
   windowManager.waitUntilReadyToShow(
     windowOptions, 

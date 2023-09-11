@@ -57,12 +57,29 @@ mixin _$SquareModel on SquareModelBase, Store {
     });
   }
 
+  late final _$isWallAtom =
+      Atom(name: 'SquareModelBase.isWall', context: context);
+
+  @override
+  bool get isWall {
+    _$isWallAtom.reportRead();
+    return super.isWall;
+  }
+
+  @override
+  set isWall(bool value) {
+    _$isWallAtom.reportWrite(value, super.isWall, () {
+      super.isWall = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 isSnake: ${isSnake},
 isMaca: ${isMaca},
-isTheHead: ${isTheHead}
+isTheHead: ${isTheHead},
+isWall: ${isWall}
     ''';
   }
 }

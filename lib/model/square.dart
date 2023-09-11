@@ -10,5 +10,6 @@ abstract class SquareModelBase with Store{
   bool isMaca = false;
   @observable
   bool isTheHead = false;
-
+  @observable
+  bool isWall = false;
 }
