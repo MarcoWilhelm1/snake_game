@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:snake_game/controller/controller.dart';
 
 class GameView extends StatefulWidget {
@@ -16,6 +17,10 @@ class _GameViewState extends State<GameView> {
   void initState() {
     super.initState();
     controller.laPrimeiraFunction();
+    controller.gameSquares[120].isSnake = true;
+    controller.gameSquares[120].isTheHead = true;
+    controller.gameSquares[119].isSnake = true;
+    Future.delayed(const Duration(seconds: 1)).then((value) => controller.laSegundaFunction());
   }
 
   @override
@@ -23,7 +28,6 @@ class _GameViewState extends State<GameView> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        
       ),// 17 horizontal 15 vertical
       body: Center(
         child: Container(
@@ -32,10 +36,12 @@ class _GameViewState extends State<GameView> {
           height: 450,
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 17,), 
-            itemCount: controller.gameSquaresteste.length,
+            itemCount: controller.gameSquares.length,
             itemBuilder: (context, index) {
-              return Container(
-                color: index % 2 == 0 ? Colors.green : Colors.green[800],
+              return Observer(
+                builder: (_) => Container(
+                  color: controller.gameSquares[index].isSnake ? Colors.orange : index % 2 == 0 ? Colors.green : Colors.green[800],
+                ),
               );
             },
           ),

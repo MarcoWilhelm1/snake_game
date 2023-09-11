@@ -6,15 +6,39 @@ part 'controller.g.dart';
 class Controller = ControllerBase with _$Controller;
 
 abstract class ControllerBase with Store{
-  
-  List<List<SquareModel>> gameSquares = [];
 
-  List<SquareModel> gameSquaresteste = [];
+  @observable
+  List<SquareModel> gameSquares = [];
+
+  // @observable
+  // List<SquareModel> teste1 = [];
 
   laPrimeiraFunction(){
     for(int i = 0; i<255; i++) {
-      gameSquaresteste.add(SquareModel());
+      gameSquares.add(SquareModel());
     }
+  }
+
+  laSegundaFunction() async{
+    List<SquareModel> backup = [];
+
+    for(int i = 0; i<255; i++){
+      SquareModel ajusteTecnico = SquareModel();
+      ajusteTecnico.isMaca = gameSquares[i].isMaca;
+      ajusteTecnico.isSnake = gameSquares[i].isSnake;
+      ajusteTecnico.isTheHead = gameSquares[i].isTheHead;
+      backup.add(ajusteTecnico);
+      gameSquares[i].isSnake = false;
+    }
+
+    for(int i = 0; i<255; i++){
+      if(backup[i].isSnake == true){
+        gameSquares[i+1].isSnake = true;
+      }
+    }
+    
+    // await Future.delayed(Duration(seconds: 1));
+    // laSegundaFunction();
   }
 
 }
