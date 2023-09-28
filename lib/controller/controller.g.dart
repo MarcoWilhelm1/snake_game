@@ -13,16 +13,24 @@ mixin _$Controller on ControllerBase, Store {
       Atom(name: 'ControllerBase.gameSquares', context: context);
 
   @override
-  List<SquareModel> get gameSquares {
+  List<List<SquareModel>> get gameSquares {
     _$gameSquaresAtom.reportRead();
     return super.gameSquares;
   }
 
   @override
-  set gameSquares(List<SquareModel> value) {
+  set gameSquares(List<List<SquareModel>> value) {
     _$gameSquaresAtom.reportWrite(value, super.gameSquares, () {
       super.gameSquares = value;
     });
+  }
+
+  late final _$movementAsyncAction =
+      AsyncAction('ControllerBase.movement', context: context);
+
+  @override
+  Future movement() {
+    return _$movementAsyncAction.run(() => super.movement());
   }
 
   @override

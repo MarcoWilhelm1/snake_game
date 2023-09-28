@@ -25,35 +25,35 @@ mixin _$SquareModel on SquareModelBase, Store {
     });
   }
 
-  late final _$isMacaAtom =
-      Atom(name: 'SquareModelBase.isMaca', context: context);
+  late final _$isTheTailAtom =
+      Atom(name: 'SquareModelBase.isTheTail', context: context);
 
   @override
-  bool get isMaca {
-    _$isMacaAtom.reportRead();
-    return super.isMaca;
+  bool get isTheTail {
+    _$isTheTailAtom.reportRead();
+    return super.isTheTail;
   }
 
   @override
-  set isMaca(bool value) {
-    _$isMacaAtom.reportWrite(value, super.isMaca, () {
-      super.isMaca = value;
+  set isTheTail(bool value) {
+    _$isTheTailAtom.reportWrite(value, super.isTheTail, () {
+      super.isTheTail = value;
     });
   }
 
-  late final _$isTheHeadAtom =
-      Atom(name: 'SquareModelBase.isTheHead', context: context);
+  late final _$colorAtom =
+      Atom(name: 'SquareModelBase.color', context: context);
 
   @override
-  bool get isTheHead {
-    _$isTheHeadAtom.reportRead();
-    return super.isTheHead;
+  Color get color {
+    _$colorAtom.reportRead();
+    return super.color;
   }
 
   @override
-  set isTheHead(bool value) {
-    _$isTheHeadAtom.reportWrite(value, super.isTheHead, () {
-      super.isTheHead = value;
+  set color(Color value) {
+    _$colorAtom.reportWrite(value, super.color, () {
+      super.color = value;
     });
   }
 
@@ -73,13 +73,47 @@ mixin _$SquareModel on SquareModelBase, Store {
     });
   }
 
+  late final _$isFoodAtom =
+      Atom(name: 'SquareModelBase.isFood', context: context);
+
+  @override
+  bool get isFood {
+    _$isFoodAtom.reportRead();
+    return super.isFood;
+  }
+
+  @override
+  set isFood(bool value) {
+    _$isFoodAtom.reportWrite(value, super.isFood, () {
+      super.isFood = value;
+    });
+  }
+
+  late final _$direcaoAtom =
+      Atom(name: 'SquareModelBase.direcao', context: context);
+
+  @override
+  Direction get direcao {
+    _$direcaoAtom.reportRead();
+    return super.direcao;
+  }
+
+  @override
+  set direcao(Direction value) {
+    _$direcaoAtom.reportWrite(value, super.direcao, () {
+      super.direcao = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 isSnake: ${isSnake},
-isMaca: ${isMaca},
-isTheHead: ${isTheHead},
-isWall: ${isWall}
+isTheTail: ${isTheTail},
+color: ${color},
+isWall: ${isWall},
+isFood: ${isFood},
+direcao: ${direcao}
     ''';
   }
 }

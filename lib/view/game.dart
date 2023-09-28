@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:snake_game/controller/controller.dart';
 
@@ -16,36 +17,53 @@ class _GameViewState extends State<GameView> {
   @override
   void initState() {
     super.initState();
-    controller.laPrimeiraFunction();
-    controller.gameSquares[153].isSnake = true;
-    controller.gameSquares[154].isTheHead = true;
-    controller.gameSquares[154].isSnake = true;
-    Future.delayed(const Duration(seconds: 1)).then((value) => controller.laSegundaFunction());
+    controller.generateList();
+    controller.gameSquares[1][8].isSnake = true;
+    controller.gameSquares[1][8].isTheTail = true;
+    controller.gameSquares[2][8].isSnake = true;
+    controller.gameSquares[8][8].isFood = true;
+
+    Future.delayed(Duration(seconds: 1)).then((value) => controller.movement());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.blueGrey ,
       appBar: AppBar(
         backgroundColor: Colors.grey,
         toolbarHeight: 50,
       ),
       body: Center(
         child: Container(
-          color: Colors.white,
+          color: Colors.blueGrey,
           width: 570,
           height: 510,
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 19,), 
-            itemCount: controller.gameSquares.length,
-            itemBuilder: (context, index) {
-              return Observer(
-                builder: (_) => Container(
-                  color: controller.gameSquares[index].isSnake ? Colors.orange : controller.gameSquares[index].isWall ? Colors.white : index % 2 == 0 ? Colors.green : Colors.green[800],
-                ),
-              );
-            },
+          child: Observer(
+            builder: (_) => RawKeyboardListener(
+              autofocus: true,
+              focusNode: FocusNode(),
+              onKey: (event) async{
+                if (event is RawKeyDownEvent) {
+                  // if (event.isKeyPressed(LogicalKeyboardKey.)) {
+                   
+                  // }
+                }
+              },
+              child: Row(
+                children: controller.gameSquares.map((e) {
+                  return Column(
+                    children: e.map((e) {
+                      return Container(
+                        height: 30,
+                        width: 30,
+                        color: e.isWall ? Colors.transparent : e.isSnake ? Colors.red : e.isFood ? Colors.orange : e.color,
+                      );
+                    }).toList(),
+                  );
+                }).toList(),
+              )
+            ),
           ),
         ),
       ),
